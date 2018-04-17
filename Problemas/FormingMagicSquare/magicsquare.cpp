@@ -105,7 +105,6 @@ int result( vector < vector<int> >  &s, vector < vector<int> >  &s2, int pos) //
         int new_cost = -1;
         for(int i = 1; i < 10; i++)
         {
-            bool ckeck = false;
             int aux = s2[pos/3][pos%3];
             s2[pos/3][pos%3] = i;
             new_cost = result(s,s2,pos+1);
@@ -117,6 +116,14 @@ int result( vector < vector<int> >  &s, vector < vector<int> >  &s2, int pos) //
                         old_cost = new_cost;
             }
             s2[pos/3][pos%3] = aux;
+            new_cost = result(s,s2,pos+1);
+            if(new_cost != -1)
+            {
+                if(old_cost == -1)
+                    old_cost = new_cost;
+                else if(old_cost > new_cost)
+                        old_cost = new_cost;
+            }
         }
 
         return old_cost;
