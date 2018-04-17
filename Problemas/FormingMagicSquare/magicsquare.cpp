@@ -76,7 +76,7 @@ int result( vector < vector<int> >  &s, vector < vector<int> >  &s2, int pos) //
     else
     {
 
-        if((pos == 3) )
+        if((pos == 3) || pos == 6)
         {
             int sLine = 0;
             bool magicLine = true;
