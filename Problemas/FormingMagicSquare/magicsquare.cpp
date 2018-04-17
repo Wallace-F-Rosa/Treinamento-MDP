@@ -38,16 +38,6 @@ bool magic(vector < vector<int> >  &s)
     return valid;
 }
 
-bool square_check(vector < vector<int> >  &s)
-{
-    //check if the square have repeating numbers
-    for(int i = 0; i < 8; i++)
-        for(int j = i+1; j < 9; j++)
-            if(s[i/3][i%3] == s[j/3][j%3])
-                return false;
-    
-    return true;
-}
 
 int square_cost(vector < vector<int> >  &s, vector < vector<int> >  &s2)
 {
@@ -76,29 +66,23 @@ int result( vector < vector<int> >  &s, vector < vector<int> >  &s2, int pos) //
     else
     {
 
-        if((pos == 3) || pos == 6)
+        if(pos == 3 || pos == 6)
         {
             int sLine = 0;
-            bool magicLine = true;
             for(int i = 0; i <= (pos-1)/3 ; i++)
             {
                 for(int j = 0; j <= (pos-1)%3; j++)
                 {
                     
-                    sLine += s[i][j];
+                    sLine += s2[i][j];
                 }
 
                 if(sLine != 15 )
-                    magicLine = false;
-            
-                if(!magicLine)
                     return -1;
+            
                 
                 sLine = 0;
-                magicLine = true;
             }
-            
-
         }
         
         int old_cost = -1;
@@ -116,14 +100,6 @@ int result( vector < vector<int> >  &s, vector < vector<int> >  &s2, int pos) //
                         old_cost = new_cost;
             }
             s2[pos/3][pos%3] = aux;
-            new_cost = result(s,s2,pos+1);
-            if(new_cost != -1)
-            {
-                if(old_cost == -1)
-                    old_cost = new_cost;
-                else if(old_cost > new_cost)
-                        old_cost = new_cost;
-            }
         }
 
         return old_cost;
@@ -153,7 +129,6 @@ int main() {
           cin >> s[s_i][s_j];
        }
     }
-
 
     int result = formingMagicSquare(s);
     cout << result << endl; 
